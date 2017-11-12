@@ -9,12 +9,12 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws Exception {
         long time = System.nanoTime();
-        WordAnalytics solver = new WordAnalytics("words.txt");
-        solver.sort();
+        WordAnalytics analizer = new WordAnalytics("words.txt");
+        analizer.sort();
         System.out.println((System.nanoTime() - time) * Math.pow(10, -6) + " millisec");
         getMemoryConsumption();
 
-        getWordsInformation(solver);
+        getWordsInformation(analizer);
     }
 
     private static void getWordsInformation(WordAnalytics analazer) {
