@@ -17,6 +17,11 @@ public class WordsTreeNode {
         this.value = value;
     }
 
+    /**
+     * if a node in values
+     * contains the letter
+     * returns that node
+     */
     public WordsTreeNode getNodeWithLetter(char letter) {
         for (WordsTreeNode node: values)
             if (node.value == letter)

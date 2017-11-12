@@ -8,6 +8,12 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
+/** does many(way too many)
+ * usefull things with words
+ * gets words from file
+ * sorts them into lists
+ * can get the bestest words
+ */
 public class WordAnalytics {
     private String filePath;
     private WordsTree tree;
@@ -48,8 +54,11 @@ public class WordAnalytics {
     }
 
     /**
-     * Sort all words form file
-     * to simpleWords list or concatenatedWords list
+     * Sorts all words form file
+     * to simpleWords, concatenatedWords
+     * and partlyConcatenatedWords lists
+     * if they belong there
+     * (does not sort words by size)
      */
     public void sort() {
         getAllWordsFromFile();
@@ -69,7 +78,7 @@ public class WordAnalytics {
     /**
      * A method checks if word is fully concatenated
      * @param isEntire indicates whether it is initial version of word
-     * or its part in recursion
+     * otherwise it knows it's in recursion
      * @param word to check
      * @return true if word is fully concatenated
      */
@@ -112,14 +121,14 @@ public class WordAnalytics {
 
     /**
      * A method creates Map with length and concatenated words of it
-     * @param indexFromEnd indicates how great concatenated words to get, 1 - the greatest
+     * @param indexFromEnd indicates how many concatenated words to get, 1 gets a single biggest word
      * @return all words with same length
      * @throws IllegalArgumentException when index is invalid or no concatenated words in file
      */
     @SuppressWarnings("unchecked")
     public List<String> getConcatenatedWordByLengthAt(int indexFromEnd) throws IllegalArgumentException {
         if (indexFromEnd < 1)
-            throw new IllegalArgumentException("illegal index");
+            throw new IllegalArgumentException("invalid index");
 
         if (allWords.size() == 0)
             sort();
@@ -129,7 +138,7 @@ public class WordAnalytics {
         Map<Integer, List<String>> wordsByLength = getWordsByLength();
         Map<Integer, List<String>> sortedWordsByLength = new TreeMap<>(wordsByLength);
         if (indexFromEnd > sortedWordsByLength.keySet().size())
-            throw new IllegalArgumentException("illegal index");
+            throw new IllegalArgumentException("invalid index");
 
         return (List<String>)sortedWordsByLength.values().toArray()[sortedWordsByLength.size() - indexFromEnd];
     }
@@ -151,7 +160,7 @@ public class WordAnalytics {
 
     /**
      * Method reads words form file at filePath
-     * and fills list of words and trie with them
+     * and fills list allWords and tree with the words from file path
      * @throws IllegalArgumentException when file contains no words
      */
     private void getAllWordsFromFile() throws IllegalArgumentException {
@@ -166,6 +175,6 @@ public class WordAnalytics {
         }
 
         if (allWords.size() == 0)
-            throw new IllegalArgumentException("Your file is empty. No cheat");
+            throw new IllegalArgumentException("Empty file");
     }
 }

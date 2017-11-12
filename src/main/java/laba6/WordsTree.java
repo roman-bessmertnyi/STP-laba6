@@ -14,7 +14,7 @@ public class WordsTree {
      */
     public void insert(String word) throws IllegalArgumentException {
         if (word.isEmpty())
-            throw new IllegalArgumentException("Empty string isn't real value to insert, agree?");
+            throw new IllegalArgumentException("Empty string");
 
         WordsTreeNode currentNode = root;
         char currentLetter;
@@ -35,6 +35,15 @@ public class WordsTree {
         currentNode.isFinal = true;
     }
 
+    /**
+     * isFinal signifies ends of words
+     * Method checks if the word has
+     * an end in the tree
+     * and thus, if it exists in the tree
+     * then returns that ending
+     * @param word
+     * @throws IllegalArgumentException
+     */
     public WordsTreeNode getFinalNode(String word) {
         WordsTreeNode currentNode = root;
         if (word.isEmpty())
